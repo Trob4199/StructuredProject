@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StructuredProject", "StructuredProject\StructuredProject.csproj", "{3B416172-A636-47B3-9E63-10D1B7F45160}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StructuredProject", "StructuredProject\StructuredProject.csproj", "{3B416172-A636-47B3-9E63-10D1B7F45160}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CKK.Logic", "CKK.Logic\CKK.Logic.csproj", "{C82F3370-2928-4BD9-AE78-32119E78179D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CKK.Logic", "CKK.Logic\CKK.Logic.csproj", "{C82F3370-2928-4BD9-AE78-32119E78179D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

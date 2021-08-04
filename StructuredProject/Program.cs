@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CKK.Logic.Models;
+using System;   
 
 namespace StructuredProject
 {
