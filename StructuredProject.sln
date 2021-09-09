@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StructuredProject", "Struct
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CKK.Logic", "CKK.Logic\CKK.Logic.csproj", "{C82F3370-2928-4BD9-AE78-32119E78179D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CKK.test", "CKK.test\CKK.test.csproj", "{DBDF1FC3-75A0-42F5-8E1D-34AB8BE26F85}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C82F3370-2928-4BD9-AE78-32119E78179D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C82F3370-2928-4BD9-AE78-32119E78179D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C82F3370-2928-4BD9-AE78-32119E78179D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBDF1FC3-75A0-42F5-8E1D-34AB8BE26F85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBDF1FC3-75A0-42F5-8E1D-34AB8BE26F85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBDF1FC3-75A0-42F5-8E1D-34AB8BE26F85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBDF1FC3-75A0-42F5-8E1D-34AB8BE26F85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
