@@ -16,7 +16,13 @@ namespace CKK.Logic.Models
 
         public void SetQuantity(int aQuantity)
         {
-            Quantity = aQuantity;
+            if (aQuantity >= 0)
+            {
+                Quantity = aQuantity;
+            }
+
+            else Quantity = 0;
+            
         }
 
         public int GetQuantity()

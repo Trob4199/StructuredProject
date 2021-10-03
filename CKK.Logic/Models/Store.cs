@@ -10,11 +10,6 @@ namespace CKK.Logic.Models
         int Id;
         string Name;
         List<StoreItem> Items = new();
-
-        
-        Product Product1;
-        Product Product2;
-        Product Product3;
         
         public void SetId(int aId)
         {
@@ -40,6 +35,11 @@ namespace CKK.Logic.Models
         {
             int productid = prod.GetId();
             int idIndex = 0;
+
+            if(quantity <= 0)
+            {
+                return null;
+            }
 
             StoreItem storeItemtemp = new(prod, quantity);
 
@@ -78,7 +78,7 @@ namespace CKK.Logic.Models
                     if (Items[i].GetProduct().GetId() == id)
                     {
                         idIndex = i;
-                        if (Items[i].GetQuantity() < quantity)
+                        if (Items[i].GetQuantity() > quantity)
                         {
                             Items[i].SetQuantity(Items[i].GetQuantity() - quantity);
                         }
