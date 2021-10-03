@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 
 
 namespace CKK.Logic.Models
@@ -7,10 +9,13 @@ namespace CKK.Logic.Models
     {
         int Id;
         string Name;
+        List<StoreItem> Items = new();
+
+        
         Product Product1;
         Product Product2;
         Product Product3;
-
+        
         public void SetId(int aId)
         {
             Id = aId;
@@ -31,70 +36,92 @@ namespace CKK.Logic.Models
             return Name;
         }
 
-        public void AddStoreItem(Product prod)
+        public StoreItem AddStoreItem(Product prod, int quantity)
         {
-            if (Product1 == null)
+            int productid = prod.GetId();
+            int idIndex = 0;
+
+            StoreItem storeItemtemp = new(prod, quantity);
+
+            if (FindStoreItemById(productid) == null)
             {
-                Product1 = prod;
+
+                Items.Add(storeItemtemp);
+                return storeItemtemp;
             }
-            else if (Product2 == null)
+            else
             {
-                Product2 = prod;
+                for (int i = 0; i < Items.Count; i++)
+                {
+                    if (Items[i].GetProduct().GetId() == prod.GetId())
+                    {
+                        Items[i].SetQuantity(Items[i].GetQuantity() + quantity);
+                        idIndex = i;
+
+                    }
+                }
+
+                return Items[idIndex];
+
             }
-            else if (Product3 == null)
-            {
-                Product3 = prod;
-            }
+           
         }
 
-        public void RemoveStoreItem(int productNum)
+        public StoreItem RemoveStoreItem(int id, int quantity)
         {
-            if (productNum == 1)
+            int idIndex = 0;
+
+            if(FindStoreItemById(id) != null)
             {
-                Product1 = null;
+                for (int i =0; i < Items.Count; i++)
+                {
+                    if (Items[i].GetProduct().GetId() == id)
+                    {
+                        idIndex = i;
+                        if (Items[i].GetQuantity() < quantity)
+                        {
+                            Items[i].SetQuantity(Items[i].GetQuantity() - quantity);
+                        }
+                        else Items[i].SetQuantity(0);
+                        
+
+                    }
+                }
+                return Items[idIndex];
             }
-            else if (productNum == 2) 
-            {
-                Product2 = null;
-            }
-            else if (productNum == 3)
-            {
-                Product3 = null;
-            }
+            return null;
+            
+
         }
 
-        public Product GetStoreItem(int productNum)
+        public StoreItem FindStoreItemById(int Id)
         {
-            if (productNum == 1)
+
+
+
+            if (Items.Count > 0)
             {
-                return Product1;
+                var storeItem2 =
+                    from item in Items
+                    where item.GetProduct().GetId() == Id
+                    select item;
+
+                return storeItem2.FirstOrDefault();
+
+                //var storeItem1 =
+                //Items.Where(f => f.GetProduct().GetId() == Id).FirstOrDefault();
+
+
+                //return storeItem1;
             }
-            else if (productNum == 2)
-            {
-                return Product2;
-            }
-            else if (productNum == 3)
-            {
-                return Product3;
-            }
-            else return null;
+
+            return null;
+
         }
 
-        public Product FindStoreItemById(int Id)
+        public List<StoreItem> GetStoreItems()
         {
-            if (Id == 1)
-            {
-                return Product1;
-            }
-            else if (Id == 2)
-            {
-                return Product2;
-            }
-            else if (Id == 3)
-            {
-                return Product3;
-            }
-            else return null;
+            return Items;
         }
 
     }
