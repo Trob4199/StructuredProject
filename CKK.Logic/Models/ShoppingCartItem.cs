@@ -1,19 +1,17 @@
-﻿using System;
-
+﻿using CKK.Logic.Interfaces;
 
 namespace CKK.Logic.Models
 {
-    public class ShoppingCartItem  // Class, does not include modifier (public, private)
+    public class ShoppingCartItem : InventoryItem  // Class, does not include modifier (public, private)
     {
-        Product Product;
-        int Quantity;
 
         public ShoppingCartItem(Product aProduct, int aQuantity)
+            
         {
             Product = aProduct;
             Quantity = aQuantity;
         }
-
+        /*
         public void SetQuantity(int aQuantity)
         {
             Quantity = aQuantity;
@@ -33,10 +31,10 @@ namespace CKK.Logic.Models
         {
             return Product;
         }
-
+        */
         public decimal GetTotal()
         {
-            return Product.GetPrice() * Quantity;
+            return Product.Price * Quantity;
         }
 
 

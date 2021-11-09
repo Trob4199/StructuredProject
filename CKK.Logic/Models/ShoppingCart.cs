@@ -1,31 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CKK.Logic.Interfaces;
 
 namespace CKK.Logic.Models
 {
-    public class ShoppingCart
+    public class ShoppingCart : IShoppingCart
     {
         Customer Customer;
-        List<ShoppingCartItem> Products = new();
+        public List<ShoppingCartItem> Products = new();
 
         public ShoppingCart(Customer cust)
         {
             Customer = cust;
         }
 
+        public List<ShoppingCartItem> Products2 { get; }
+
         public int GetCustomerID()
         {
-            int Id = Customer.GetId();
+            int Id = Customer.id;
             return Id;
         }
 
         public ShoppingCartItem AddProduct(Product prod, int quantity)
         {
-            int productid = prod.GetId();
-            int idIndex = 0;         
+            int productid = prod.id;
+            int idIndex = 0;
 
             if (quantity < 1)
             {
@@ -42,9 +42,9 @@ namespace CKK.Logic.Models
             {
                 for (int i = 0; i < Products.Count; i++)
                 {
-                    if (Products[i].GetProduct().GetId() == prod.GetId())
+                    if (Products[i].Product.id == prod.id)
                     {
-                        Products[i].SetQuantity(Products[i].GetQuantity() + quantity);
+                        Products[i].Quantity = Products[i].Quantity + quantity;
                         idIndex = i;
                     }
                 }
@@ -63,19 +63,19 @@ namespace CKK.Logic.Models
             {
                 for (int i = 0; i < Products.Count; i++)
                 {
-                    if (Products[i].GetProduct().GetId() == id)
+                    if (Products[i].Product.id == id)
                     {
 
-                        if (Products[i].GetQuantity() > quantity)
+                        if (Products[i].Quantity > quantity)
                         {
-                            Products[i].SetQuantity(Products[i].GetQuantity() - quantity);
+                            Products[i].Quantity = (Products[i].Quantity - quantity);
                             idIndex = i;
                             return Products[i];
 
                         }
                         else
                         {
-                            Products[i].SetQuantity(0);
+                            Products[i].Quantity = 0;
                             ShoppingCartItemTemp = Products[i];
                             Products.RemoveAt(i);
                             return ShoppingCartItemTemp;
@@ -93,7 +93,7 @@ namespace CKK.Logic.Models
             {
                 var cartItem2 =
                     from item in Products
-                    where item.GetProduct().GetId() == id
+                    where item.Product.id == id
                     select item;
 
                 return cartItem2.FirstOrDefault();
@@ -116,7 +116,7 @@ namespace CKK.Logic.Models
             {
                 total += Products[i].GetTotal();
             }
-            
+
             return total;
         }
         public List<ShoppingCartItem> GetProducts()

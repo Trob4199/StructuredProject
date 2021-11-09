@@ -1,27 +1,35 @@
 ﻿using System;
+using CKK.Logic.Interfaces;
 
 
 namespace CKK.Logic.Models
 {
-    public class StoreItem
+    public class StoreItem : InventoryItem
     {
-        Product Product;
-        int Quantity;
-
+    
         public StoreItem(Product aProduct, int aQuantity)
         {
             Product = aProduct;
             Quantity = aQuantity;
         }
 
-        public void SetQuantity(int aQuantity)
+        /*
+        public int quantity
         {
-            if (aQuantity >= 0)
+            get
             {
-                Quantity = aQuantity;
+                return Quantity;
+            }
+            set
+            {
+                if (value >= 0)
+                {
+                    Quantity = aQuantity;
+                }
+
+                else Quantity = 0;
             }
 
-            else Quantity = 0;
             
         }
 
@@ -30,6 +38,7 @@ namespace CKK.Logic.Models
             return Quantity;
         }
 
+        */
         public void SetProduct(Product aProduct)
         {
             Product = aProduct;

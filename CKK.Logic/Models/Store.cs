@@ -1,39 +1,20 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using CKK.Logic.Interfaces;
 
 
 namespace CKK.Logic.Models
 {
-    public class Store
+    public class Store : Entity, IStore
     {
-        int Id;
-        string Name;
+
         List<StoreItem> Items = new();
         
-        public void SetId(int aId)
-        {
-            Id = aId;
-        }
-
-        public int GetId()
-        {
-            return Id;
-        }
-
-        public void SetName(string aName)
-        {
-            Name = aName;
-        }
-
-        public string GetName()
-        {
-            return Name;
-        }
 
         public StoreItem AddStoreItem(Product prod, int quantity)
         {
-            int productid = prod.GetId();
+            int productid = prod.id;
             int idIndex = 0;
 
             if(quantity <= 0)
@@ -53,9 +34,9 @@ namespace CKK.Logic.Models
             {
                 for (int i = 0; i < Items.Count; i++)
                 {
-                    if (Items[i].GetProduct().GetId() == prod.GetId())
+                    if (Items[i].GetProduct().id == prod.id)
                     {
-                        Items[i].SetQuantity(Items[i].GetQuantity() + quantity);
+                        Items[i].Quantity=(Items[i].Quantity + quantity);
                         idIndex = i;
 
                     }
@@ -75,14 +56,14 @@ namespace CKK.Logic.Models
             {
                 for (int i =0; i < Items.Count; i++)
                 {
-                    if (Items[i].GetProduct().GetId() == id)
+                    if (Items[i].GetProduct().id == id)
                     {
                         idIndex = i;
-                        if (Items[i].GetQuantity() > quantity)
+                        if (Items[i].Quantity > quantity)
                         {
-                            Items[i].SetQuantity(Items[i].GetQuantity() - quantity);
+                            Items[i].Quantity=(Items[i].Quantity - quantity);
                         }
-                        else Items[i].SetQuantity(0);
+                        else Items[i].Quantity = 0;
                         
 
                     }
@@ -103,7 +84,7 @@ namespace CKK.Logic.Models
             {
                 var storeItem2 =
                     from item in Items
-                    where item.GetProduct().GetId() == Id
+                    where item.GetProduct().id == Id
                     select item;
 
                 return storeItem2.FirstOrDefault();
