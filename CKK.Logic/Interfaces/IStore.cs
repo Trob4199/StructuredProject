@@ -12,7 +12,9 @@ namespace CKK.Logic.Models
         StoreItem AddStoreItem(Product prod, int quantity);
 
 
-        StoreItem RemoveStoreItem(int id, int quantity);
+        StoreItem RemoveStoreItem(int Id, int quantity);
+
+        String DeleteStoreItem(int Id);
 
 
         StoreItem FindStoreItemById(int Id);

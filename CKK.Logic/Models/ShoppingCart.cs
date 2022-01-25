@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CKK.Logic.Interfaces;
+using CKK.Logic.Exceptions;
+using System;
 
 namespace CKK.Logic.Models
 {
@@ -18,18 +20,20 @@ namespace CKK.Logic.Models
 
         public int GetCustomerID()
         {
-            int Id = Customer.id;
+            int Id = Customer.Id;
             return Id;
         }
 
         public ShoppingCartItem AddProduct(Product prod, int quantity)
         {
-            int productid = prod.id;
+            int productid = prod.Id;
             int idIndex = 0;
 
             if (quantity < 1)
             {
-                return null;
+                
+                throw new InventoryItemStockTooLowException("Quanity Shall be greater than 0");
+
             }
 
             if (GetProductById(productid) == null)
@@ -42,7 +46,7 @@ namespace CKK.Logic.Models
             {
                 for (int i = 0; i < Products.Count; i++)
                 {
-                    if (Products[i].Product.id == prod.id)
+                    if (Products[i].Product.Id == prod.Id)
                     {
                         Products[i].Quantity = Products[i].Quantity + quantity;
                         idIndex = i;
@@ -59,11 +63,16 @@ namespace CKK.Logic.Models
             int idIndex = 0;
             ShoppingCartItem ShoppingCartItemTemp;
 
+            if(quantity < 0)
+            {
+                throw new ArgumentOutOfRangeException("Number shall be greater than 0");
+            }
+
             if (GetProductById(id) != null)
             {
                 for (int i = 0; i < Products.Count; i++)
                 {
-                    if (Products[i].Product.id == id)
+                    if (Products[i].Product.Id == id)
                     {
 
                         if (Products[i].Quantity > quantity)
@@ -84,25 +93,29 @@ namespace CKK.Logic.Models
                 }
                 return Products[idIndex];
             }
+            else if(GetProductById(id) == null)
+            {
+                throw new ProductDoesNotExistException("Product does not exist");
+            }
             return null;
         }
         public ShoppingCartItem GetProductById(int id)
         {
+            if(id < 0)
+            {
+                throw new InvalidIdException("ID must be greater than 0");
+            }
+     
 
             if (Products.Count > 0)
             {
                 var cartItem2 =
                     from item in Products
-                    where item.Product.id == id
+                    where item.Product.Id == id
                     select item;
 
                 return cartItem2.FirstOrDefault();
 
-                //var storeItem1 =
-                //Items.Where(f => f.GetProduct().GetId() == Id).FirstOrDefault();
-
-
-                //return storeItem1;
             }
 
             return null;

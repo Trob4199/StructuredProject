@@ -14,18 +14,18 @@ namespace CKK.test
             Product Product2 = new();
 
 
-            Product1.SetId(1);
-            Product1.SetName("Screw");
-            Product1.SetPrice(.090m);
+            Product1.Id = 1;
+            Product1.Name = "Screw";
+            Product1.Price = .090m;
 
-            Product2.SetId(2);
-            Product2.SetName("Hammer");
-            Product2.SetPrice(12.50m);
+            Product2.Id = 2;
+            Product2.Name = "Hammer";
+            Product2.Price = 12.50m;
 
-            Customer1.SetId(1);
-            Customer1.SetName("Trevor");
+            Customer1.Id = 1 ;
+            Customer1.Name = "Trevor";
 
-            Customer1.SetAddress("Street");
+            Customer1.Address = "Street";
 
             ShoppingCart ShoppingCart1 = new(Customer1);
             ShoppingCartItem addtest = ShoppingCart1.AddProduct(Product1, 10);
@@ -42,23 +42,23 @@ namespace CKK.test
             Product Product2 = new();
 
 
-            Product1.SetId(1);
-            Product1.SetName("Screw");
-            Product1.SetPrice(.090m);
+            Product1.Id= 1;
+            Product1.Name = "Screw";
+            Product1.Price = .090m;
 
-            Product2.SetId(2);
-            Product2.SetName("Hammer");
-            Product2.SetPrice(12.50m);
+            Product2.Id = 2;
+            Product2.Name = "Hammer";
+            Product2.Price = 12.50m;
 
-            Customer1.SetId(1);
-            Customer1.SetName("Trevor");
+            Customer1.Id = 1;
+            Customer1.Name = "Trevor";
 
-            Customer1.SetAddress("Street");
+            Customer1.Address = "Street";
 
             ShoppingCart ShoppingCart1 = new(Customer1);
             ShoppingCart1.AddProduct(Product1, 10);
 
-            Assert.IsNull(ShoppingCart1.RemoveProduct(Product1, 10));
+            Assert.IsNull(ShoppingCart1.RemoveProduct(Product1.Id, 10));
         }
 
         [TestMethod]
@@ -69,18 +69,18 @@ namespace CKK.test
             Product Product2 = new();
 
 
-            Product1.SetId(1);
-            Product1.SetName("Screw");
-            Product1.SetPrice(.090m);
+            Product1.Id = 1;
+            Product1.Name = "Screw";
+            Product1.Price = .090m;
 
-            Product2.SetId(2);
-            Product2.SetName("Hammer");
-            Product2.SetPrice(12.50m);
+            Product2.Id = 2;
+            Product2.Name = "Hammer";
+            Product2.Price = 12.50m;
 
-            Customer1.SetId(1);
-            Customer1.SetName("Trevor");
+            Customer1.Id = 1;
+            Customer1.Name = "Trevor";
 
-            Customer1.SetAddress("Street");
+            Customer1.Address = "Street";
 
             ShoppingCart ShoppingCart1 = new(Customer1);
             ShoppingCart1.AddProduct(Product1, 10);

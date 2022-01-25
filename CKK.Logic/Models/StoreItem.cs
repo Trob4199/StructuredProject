@@ -49,5 +49,11 @@ namespace CKK.Logic.Models
             return Product;
         }
 
+        public override string ToString()
+        {
+            string str = ($"{Product.Id} \t\t {Product.Name} \t\t {Product.Price}") ;
+            return str;
+        }
+
     }
 }

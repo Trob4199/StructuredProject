@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CKK.Logic\CKK.Logic.csproj" />
+    <ProjectReference Include="..\CKK.Logic\CKK_Logic.csproj" />
     <ProjectReference Include="..\StructuredProject\StructuredProject.csproj" />
   </ItemGroup>
 
