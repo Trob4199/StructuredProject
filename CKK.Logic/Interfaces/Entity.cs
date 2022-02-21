@@ -5,6 +5,7 @@ using CKK.Logic.Exceptions;
 
 namespace CKK.Logic.Interfaces
 {
+    [Serializable]
     public abstract class Entity : Object
     {
         private int ID;

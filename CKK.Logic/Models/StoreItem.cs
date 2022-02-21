@@ -4,6 +4,7 @@ using CKK.Logic.Interfaces;
 
 namespace CKK.Logic.Models
 {
+    [Serializable]
     public class StoreItem : InventoryItem
     {
     
@@ -51,7 +52,7 @@ namespace CKK.Logic.Models
 
         public override string ToString()
         {
-            string str = ($"{Product.Id} \t\t {Product.Name} \t\t {Product.Price}") ;
+            string str = ($"{Product.Id} \t\t {Product.Name} \t\t {Product.Price} \t\t ") ;
             return str;
         }
 

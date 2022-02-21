@@ -8,6 +8,7 @@ using CKK.Logic.Exceptions;
 
 namespace CKK.Logic.Interfaces
 {
+    [Serializable]
     public abstract class InventoryItem : Object
     {
         private int quanity; 
