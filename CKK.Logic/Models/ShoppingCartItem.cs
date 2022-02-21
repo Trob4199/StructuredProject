@@ -1,7 +1,9 @@
-﻿using CKK.Logic.Interfaces;
+﻿using System;
+using CKK.Logic.Interfaces;
 
 namespace CKK.Logic.Models
 {
+    [Serializable]
     public class ShoppingCartItem : InventoryItem  // Class, does not include modifier (public, private)
     {
 

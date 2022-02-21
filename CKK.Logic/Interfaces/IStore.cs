@@ -22,5 +22,6 @@ namespace CKK.Logic.Models
 
         public List<StoreItem> GetStoreItems();
 
+
     }
 }
