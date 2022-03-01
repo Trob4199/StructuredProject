@@ -22,6 +22,10 @@ namespace CKK.Logic.Models
 
         public List<StoreItem> GetStoreItems();
 
+        List<StoreItem> GetAllProductsByName(string name);
 
+        List<StoreItem> GetProductsByQuantity();
+
+        List<StoreItem> GetProductsByPrice();
     }
 }

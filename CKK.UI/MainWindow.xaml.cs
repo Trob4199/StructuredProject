@@ -13,19 +13,51 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CKK.Logic.Models;
+using CKK.UI;
+using CKK.Persistance.Models;
 
-namespace CKK.UI
+
+namespace StructuredProject
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+
         private IStore Store;
         public MainWindow()
         {
-            Store = new Store();    
+            Store = new FileStore();
             InitializeComponent();
+        }
+
+        private void AddItembutton_Click(object sender, RoutedEventArgs e)
+        {
+            AddItemWindow addItem = new AddItemWindow();
+            addItem.Show();
+
+        }
+
+        private void InventoryItembutton_Click(object sender, RoutedEventArgs e)
+        {
+            FileStore tp = (FileStore)Application.Current.FindResource("globStore");
+            InventoryManagementForm inven = new InventoryManagementForm(tp);
+            inven.Show();
+ 
+        }
+
+        private void RemoveItembutton_Click(object sender, RoutedEventArgs e)
+        {
+            RemoveItemWindow removeItem = new RemoveItemWindow();
+            removeItem.Show();
+        }
+
+        private void SearchByItembutton_Click(object sender, RoutedEventArgs e)
+        {
+            FileStore tp = (FileStore)Application.Current.FindResource("globStore");
+            ProductSearchForm search = new ProductSearchForm(tp);
+            search.Show();
         }
     }
 }

@@ -1,0 +1,38 @@
+﻿<Window x:Class="CKK.UI.ProductSearchForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CKK.UI"
+        mc:Ignorable="d"
+        Title="Product Search" Height="700" Width="640">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>  
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Label Name="searchLabel" Content="Search by Name: " Grid.Row="1" Grid.Column="1"/>
+        <TextBox Name="Searchbox" Grid.Row="1" Grid.Column="1" Margin="30"/>
+        <Button Name="SearchButton" Content="Search" Grid.Column="1" Grid.Row="2" Margin="0,10,0,40"
+                Height="40" Width="300" Click="SearchButton_Click"/>
+        <Label Name="headersLabel" Content="Item                       Name                   Price                       Quantity" Grid.Row="2" 
+               VerticalAlignment="Bottom" Grid.Column="1" FontSize="16"/>
+        <ListBox Name="lbInventoryList" HorizontalAlignment="Center" Height="185" Margin="0,0,0,0" 
+                 VerticalAlignment="Center" Width="600" Grid.Column="1" Grid.Row="3" FontSize="16"/>
+        <Button Name="DoneButton" Content="Done"  Width="150" Height="40" 
+                Grid.Column="1" Grid.Row="5" FontSize="16" Click="DoneButton_Click" Margin="0,20,0,0"/>
+
+    </Grid>
+</Window>

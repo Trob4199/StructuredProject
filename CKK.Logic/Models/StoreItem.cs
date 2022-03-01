@@ -52,7 +52,7 @@ namespace CKK.Logic.Models
 
         public override string ToString()
         {
-            string str = ($"{Product.Id} \t\t {Product.Name} \t\t {Product.Price} \t\t ") ;
+            string str = ($"{Product.Id} \t\t {Product.Name} \t\t {Product.Price:C} \t\t {Quantity}") ;
             return str;
         }
 

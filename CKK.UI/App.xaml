@@ -1,9 +1,10 @@
-﻿<Application x:Class="CKK.UI.App"
+﻿<Application x:Class="StructuredProject.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:CKK.UI"
+             xmlns:local="clr-namespace:StructuredProject"
+             xmlns:Logic="clr-namespace:CKK.Persistance.Models;assembly=CKK.Persistance"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Logic:FileStore x:Key="globStore"></Logic:FileStore>
     </Application.Resources>
 </Application>

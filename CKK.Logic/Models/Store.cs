@@ -157,5 +157,36 @@ namespace CKK.Logic.Models
             return Items;
         }
 
+        public List<StoreItem> GetAllProductsByName(string name)
+        {
+            List<StoreItem> StoreItems = new List<StoreItem>();
+
+            for (int i = 0; i< Items.Count; i++)
+            {
+                var item = Items[i];
+                if (item.Product.Name.Contains(name))
+                {
+                    StoreItems.Add(item);
+                }
+            }
+
+            return StoreItems;
+        }
+
+        public List<StoreItem> GetProductsByQuantity()
+        {
+            List<StoreItem> ItemsByQuantity = new List<StoreItem>();
+
+            return ItemsByQuantity;
+        }
+
+        public List<StoreItem> GetProductsByPrice()
+        {
+            List<StoreItem> ItemsByPrice = new List<StoreItem>();
+
+            return ItemsByPrice;
+
+        }
+
     }
 }

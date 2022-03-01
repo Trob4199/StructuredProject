@@ -7,12 +7,22 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
-    <ItemGroup>
-		<Folder Include="Models\" />
-		<Folder Include="Interfaces\"/>
-	</ItemGroup>
-	
-	<ItemGroup>
-		<ProjectReference Include="..\CKK.Logic\CKK.Logic.csproj" />
-	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\StructuredProject\CKK.Logic\CKK.Logic.csproj" />
+    <ProjectReference Include="..\CKK.Persistance\CKK.Persistance.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="ProductSearchForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="ProductSearchForm.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>
