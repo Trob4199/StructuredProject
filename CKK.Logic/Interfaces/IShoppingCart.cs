@@ -5,13 +5,12 @@ namespace CKK.Logic.Interfaces
 {
     public interface IShoppingCart
     {
-        List<ShoppingCartItem> Products2 { get; }
-
-        ShoppingCartItem AddProduct(Product prod, int quantity);
-        int GetCustomerID();
+        int GetCustomerId();
+        ShoppingCartItem AddProduct(Product prod, int Quantity);
+        ShoppingCartItem RemoveProduct(int id, int Quantity);
+        decimal GetTotal();
         ShoppingCartItem GetProductById(int id);
         List<ShoppingCartItem> GetProducts();
-        decimal GetTotal();
-        ShoppingCartItem RemoveProduct(int id, int quantity);
+
     }
 }
