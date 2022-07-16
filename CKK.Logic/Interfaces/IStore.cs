@@ -1,10 +1,11 @@
-﻿using System;
+﻿using CKK.Logic.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CKK.Logic.Models
+namespace CKK.Logic.Interfaces
 {
     public interface IStore
     {
@@ -14,7 +15,7 @@ namespace CKK.Logic.Models
 
         StoreItem RemoveStoreItem(int Id, int quantity);
 
-        String DeleteStoreItem(int Id);
+        string DeleteStoreItem(int Id);
 
 
         StoreItem FindStoreItemById(int Id);

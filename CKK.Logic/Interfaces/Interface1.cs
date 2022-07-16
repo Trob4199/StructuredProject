@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CKK.Logic.Models
+namespace CKK.Logic.Interfaces
 {
     interface Interface1
     {

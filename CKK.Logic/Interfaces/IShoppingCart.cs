@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using CKK.Logic.Models;
+using System.Collections.Generic;
 
-namespace CKK.Logic.Models
+namespace CKK.Logic.Interfaces
 {
     public interface IShoppingCart
     {

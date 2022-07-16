@@ -1,14 +1,17 @@
 ﻿using System;
-using CKK.Logic.Interfaces;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace CKK.Logic.Models
 {
     [Serializable]
-    public class Customer : Entity
+    public class Customer
     {
-        //private int Id;
-        //private string Name;
+        public int CustomerId { get; set; }
         public string Address { get; set; }
-
+        public int ShoppingCartId { get; set; }
+        //public ShoppingCart Cart { get; set; }
     }
 }
