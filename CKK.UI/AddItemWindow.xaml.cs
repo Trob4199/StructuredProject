@@ -15,6 +15,7 @@ using CKK.Logic.Models;
 using CKK.Logic.Interfaces;
 using CKK.UI;
 using CKK.Persistance.Models;
+using CKK.Logic.Repository.InMemory;
 
 namespace CKK.UI
 {
@@ -23,8 +24,10 @@ namespace CKK.UI
     /// </summary>
     public partial class AddItemWindow : Window
     {
-        public AddItemWindow()
+        private IStore Store;
+        public AddItemWindow(IStore store)
         {
+            Store = store;
             InitializeComponent();
         }
 
@@ -38,10 +41,11 @@ namespace CKK.UI
             Product productadd = new Product();
             productadd.Name = Description;
             productadd.Price = Price;
+            productadd.Quantity = quanity;
 
-            FileStore tp = (FileStore)Application.Current.FindResource("globStore");
-
-            tp.AddStoreItem(productadd, quanity);
+            
+            
+            Store.AddProduct(productadd);
 
             MessageBox.Show($"New Item Number {productadd.Id} was created for {Description}.");
             clearboxes();

@@ -7,11 +7,12 @@ using CKK.Logic.Models;
 
 namespace CKK.Logic.Repository.Interfaces
 {
-    internal interface IProductRepository: IRepository<Product>
+    public interface IProductRepository: IRepository<Product>
     {
         Product Find(int id);
-        IEnumerable<Product> Find(string name);
-        IEnumerable<Product> GetItemsByQuantity();
-        IEnumerable<Product> GetItemsByPrice();
+        IEnumerable<Product> GetItemsByName(string name);
+        IEnumerable<Product> GetItemsByQuantity(int quantity);
+        IEnumerable<Product> GetItemsByPrice(decimal price);
+
     }
 }

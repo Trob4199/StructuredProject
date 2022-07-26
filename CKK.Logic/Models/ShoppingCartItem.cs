@@ -1,44 +1,44 @@
 ﻿using System;
 using CKK.Logic.Interfaces;
+using CKK.Logic.Exceptions;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace CKK.Logic.Models
 {
     [Serializable]
-    public class ShoppingCartItem : InventoryItem  // Class, does not include modifier (public, private)
+    public class ShoppingCartItem
     {
+        public Product Product { get; set; }
+        [ForeignKey("Product")]
+        public int ProductId { get; set; }
+        private int quantity { get; set; }
+        public int ShoppingCartItemId { get; set; }
+        public List<ShoppingCart> Carts { get; set; } = new List<ShoppingCart>();
 
-        public ShoppingCartItem(Product aProduct, int aQuantity)
-            
+        public int Quantity
         {
-            Product = aProduct;
-            Quantity = aQuantity;
+            get
+            {
+                return quantity;
+            }
+            set
+            {
+                if (value >= 0)
+                {
+                    quantity = value;
+                }
+                else
+                {
+                    throw new InventoryItemStockTooLowException();
+                }
+            }
         }
-        /*
-        public void SetQuantity(int aQuantity)
-        {
-            Quantity = aQuantity;
-        }
-
-        public int GetQuantity()
-        {
-            return Quantity;
-        }
-
-        public void SetProduct(Product aProduct)
-        {
-            Product = aProduct;
-        }
-
-        public Product GetProduct()
-        {
-            return Product;
-        }
-        */
         public decimal GetTotal()
         {
             return Product.Price * Quantity;
         }
-
+        public override string ToString() => $"#{ProductId,-4} {Product.Name,-30} {$"Quantity: {Quantity:N0}",-13}";
 
 
     }

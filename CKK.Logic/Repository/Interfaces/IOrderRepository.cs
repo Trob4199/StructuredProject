@@ -7,7 +7,7 @@ using CKK.Logic.Models;
 
 namespace CKK.Logic.Repository.Interfaces
 {
-    public class IOrderRepository : IRepository<OrderSummary>
+    public interface IOrderRepository : IRepository<OrderSummary>
     {
         public void Add(OrderSummary entity)
         {

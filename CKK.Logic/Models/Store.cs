@@ -7,7 +7,7 @@ using CKK.Logic.Exceptions;
 
 namespace CKK.Logic.Models
 {
-    public class Store : Entity, IStore
+    public class Store 
     {
 
          List<StoreItem> Items = new();

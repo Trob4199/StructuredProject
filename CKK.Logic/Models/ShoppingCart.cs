@@ -7,19 +7,13 @@ using CKK.Logic.Interfaces;
 
 namespace CKK.Logic.Models
 {
-    public class ShoppingCart:IShoppingCart
+    public class ShoppingCart
     {
-
-        public ShoppingCart(Customer cust)
-        {
-            Customer = cust;
-        }
 
         public int ShoppingCartId { get; set; }
         public int CustomerId { get; set; }
-        public Customer Customer;
-        public List<ShoppingCartItem> Products { get; set; }
-        
+        public int ProductId { get; set; }
+        public int Quantity { get; set; }
 
     }
 }

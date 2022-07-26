@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using CKK.Logic.Models;
 using CKK.Persistance.Models;
+using CKK.Logic.Repository.InMemory;
+using CKK.Logic.Interfaces;
 
 namespace CKK.UI
 {
@@ -22,12 +24,13 @@ namespace CKK.UI
     public partial class RemoveItemWindow : Window
     {
         int ID;
-        StoreItem itemtemp;
-        FileStore tp;
+        Product ProdTemp;
+        private IStore Store;
         bool ready = false; 
 
-        public RemoveItemWindow()
+        public RemoveItemWindow(IStore store)
         {
+            Store = store;
             InitializeComponent();
         }
 
@@ -40,14 +43,14 @@ namespace CKK.UI
                 ID = Convert.ToInt32(((TextBox)sender).Text);
 
 
-                tp = (FileStore)Application.Current.FindResource("globStore");
-                itemtemp = tp.FindStoreItemById(ID);
+                
+                ProdTemp = Store.FindProductById(ID);
 
-                if (itemtemp != null)
+                if (ProdTemp != null)
                 {
-                    ItemDescTextBlock.Text = itemtemp.Product.Name;
-                    QtyTextBlock.Text = Convert.ToString(itemtemp.Quantity);
-                    PriceTextBlock.Text = Convert.ToString(itemtemp.Product.Price);
+                    ItemDescTextBlock.Text = ProdTemp.Name;
+                    QtyTextBlock.Text = Convert.ToString(ProdTemp.Quantity);
+                    PriceTextBlock.Text = Convert.ToString(ProdTemp.Price);
                     ready = true;
                 }
                 else
@@ -71,11 +74,11 @@ namespace CKK.UI
                 if (MessageBoxResult == MessageBoxResult.Yes)
                 {
 
-                    string deleted = tp.DeleteStoreItem(ID);
+                    Product deleted = Store.DeleteProduct(ID);
 
-                    if (deleted == "Deleted")
+                    if (deleted != null)
                     {
-                        MessageBox.Show($"Item number {ID}, {itemtemp.Product.Name} was removed successfully.");
+                        MessageBox.Show($"Item number {ID}, {ProdTemp.Name} was removed successfully.");
                         ItemDescTextBlock.Text = "";
                         QtyTextBlock.Text = "";
                         PriceTextBlock.Text = "";

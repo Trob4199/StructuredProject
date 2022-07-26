@@ -7,7 +7,7 @@ using CKK.Logic.Models;
 
 namespace CKK.Logic.Repository.Interfaces
 {
-    public class IShoppingCartItemRepository
+    public interface IShoppingCartItemRepository
     {
         public int GetCustomerId(int shoppingCartId);
         public ShoppingCartItem AddToCart(int itemId, int quantity);

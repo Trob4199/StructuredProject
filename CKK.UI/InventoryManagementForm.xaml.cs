@@ -13,7 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using CKK.Logic.Models;
 using System.Collections.ObjectModel;
-using CKK.Persistance.Models;
+using CKK.Logic.Interfaces;
+using CKK.Logic.Repository.InMemory;
+
 
 namespace CKK.UI
 {
@@ -24,13 +26,13 @@ namespace CKK.UI
     {
         private IStore _Store;
 
-        public ObservableCollection<StoreItem> _Items { get; private set; }
+        public ObservableCollection<Product> _Items { get; private set; }
 
-        public InventoryManagementForm(FileStore store)
+        public InventoryManagementForm(IStore store)
         {
             _Store = store;
             InitializeComponent();
-            _Items = new ObservableCollection<StoreItem>();
+            _Items = new ObservableCollection<Product>();
             lbInventoryList.ItemsSource = _Items;
             RefreshList();
 
@@ -41,8 +43,8 @@ namespace CKK.UI
         private void RefreshList()
         {
             _Items.Clear();
-            foreach (StoreItem si in new ObservableCollection<StoreItem>(_Store.GetStoreItems()))
-                _Items.Add(si);
+            foreach (Product product in new ObservableCollection<Product>(_Store.GetAllProducts()))
+                _Items.Add(product);
         }
 
         private void DoneButton_Click(object sender, RoutedEventArgs e)
@@ -52,20 +54,24 @@ namespace CKK.UI
 
         private void qtySortButton_Click(object sender, RoutedEventArgs e)
         {
-            List<StoreItem> itemstemp = new List<StoreItem>();
+            /*
+            List<Product> itemstemp = new List<Product>();
             itemstemp = _Store.GetProductsByQuantity();
-            _Items = new ObservableCollection<StoreItem>(itemstemp);
+            _Items = new ObservableCollection<Product>(itemstemp);
             lbInventoryList.ItemsSource = _Items;
-
+            */
 
         }
 
         private void priceSortButton_Click(object sender, RoutedEventArgs e)
         {
-            List<StoreItem> itemstemp = new List<StoreItem>();
-            itemstemp = _Store.GetProductsByPrice();
-            _Items = new ObservableCollection<StoreItem>(itemstemp);
+            /*
+            List<Product> itemstemp = new List<Product>();
+            decimal price = 0;  
+            itemstemp = _Store.GetProductsByPrice(price);
+            _Items = new ObservableCollection<Product>(itemstemp);
             lbInventoryList.ItemsSource = _Items;
+            */
         }
     }
 }

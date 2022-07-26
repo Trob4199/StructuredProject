@@ -14,6 +14,8 @@ using System.Windows.Shapes;
 using CKK.Logic.Models;
 using System.Collections.ObjectModel;
 using CKK.Persistance.Models;
+using CKK.Logic.Interfaces;
+using CKK.Logic.Repository.InMemory;
 
 namespace CKK.UI
 {
@@ -24,10 +26,11 @@ namespace CKK.UI
     {
         private IStore _Store;
 
-        public ObservableCollection<StoreItem> _Items { get; private set; }
+        public ObservableCollection<Product> _Items { get; private set; }
 
-        public ProductSearchForm(FileStore store)
+        public ProductSearchForm(IStore store)
         {
+            
             _Store = store;
             InitializeComponent();
 
@@ -36,8 +39,8 @@ namespace CKK.UI
         private void RefreshList()
         {
             _Items.Clear();
-            foreach (StoreItem si in new ObservableCollection<StoreItem>(_Store.GetStoreItems()))
-                _Items.Add(si);
+            foreach (Product prod in new ObservableCollection<Product>(_Store.GetAllProducts()))
+                _Items.Add(prod);
         }
 
         private void DoneButton_Click(object sender, RoutedEventArgs e)
@@ -47,29 +50,34 @@ namespace CKK.UI
 
         private void qtySortButton_Click(object sender, RoutedEventArgs e)
         {
-            List<StoreItem> itemstemp = new List<StoreItem>();
+            /*
+            List<Product> itemstemp = new List<Product>();
             itemstemp = _Store.GetProductsByQuantity();
-            _Items = new ObservableCollection<StoreItem>(itemstemp);
+            _Items = new ObservableCollection<Product>(itemstemp);
             lbInventoryList.ItemsSource = _Items;
-
+            */
 
         }
 
         private void priceSortButton_Click(object sender, RoutedEventArgs e)
         {
-            List<StoreItem> itemstemp = new List<StoreItem>();
+            /*
+            List<Product> itemstemp = new List<Product>();
             itemstemp = _Store.GetProductsByPrice();
-            _Items = new ObservableCollection<StoreItem>(itemstemp);
+            _Items = new ObservableCollection<Product>(itemstemp);
             lbInventoryList.ItemsSource = _Items;
+            */
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
+            
             string searchtext = Searchbox.Text;
-            List<StoreItem> itemstemp = new List<StoreItem>();
-            itemstemp = _Store.GetAllProductsByName(searchtext);
-            _Items = new ObservableCollection<StoreItem>(itemstemp);
+            List<Product> itemstemp = new List<Product>();
+            itemstemp = _Store.GetProductsByName(searchtext);
+            _Items = new ObservableCollection<Product>(itemstemp);
             lbInventoryList.ItemsSource = _Items;
+            
         }
     }
 }

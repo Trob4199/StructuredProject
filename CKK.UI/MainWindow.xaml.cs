@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using CKK.Logic.Models;
 using CKK.UI;
 using CKK.Persistance.Models;
+using CKK.Logic.Interfaces;
+using CKK.Logic.Repository.InMemory;
 
 
 namespace StructuredProject
@@ -26,37 +28,40 @@ namespace StructuredProject
     {
 
         private IStore Store;
+        
         public MainWindow()
         {
-            Store = new FileStore();
+            DatabaseConnectionFactory conn = new DatabaseConnectionFactory();
+            ProductRepository prodrepo = new ProductRepository(conn);
+            Store = new DataStore(prodrepo);
+
             InitializeComponent();
         }
 
         private void AddItembutton_Click(object sender, RoutedEventArgs e)
         {
-            AddItemWindow addItem = new AddItemWindow();
+            AddItemWindow addItem = new AddItemWindow(Store);
             addItem.Show();
 
         }
 
         private void InventoryItembutton_Click(object sender, RoutedEventArgs e)
         {
-            FileStore tp = (FileStore)Application.Current.FindResource("globStore");
-            InventoryManagementForm inven = new InventoryManagementForm(tp);
+            
+            InventoryManagementForm inven = new InventoryManagementForm(Store);
             inven.Show();
  
         }
 
         private void RemoveItembutton_Click(object sender, RoutedEventArgs e)
         {
-            RemoveItemWindow removeItem = new RemoveItemWindow();
+            RemoveItemWindow removeItem = new RemoveItemWindow(Store);
             removeItem.Show();
         }
 
         private void SearchByItembutton_Click(object sender, RoutedEventArgs e)
         {
-            FileStore tp = (FileStore)Application.Current.FindResource("globStore");
-            ProductSearchForm search = new ProductSearchForm(tp);
+            ProductSearchForm search = new ProductSearchForm(Store);
             search.Show();
         }
     }

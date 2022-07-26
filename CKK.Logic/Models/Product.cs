@@ -8,9 +8,11 @@ using CKK.Logic.Interfaces;
 namespace CKK.Logic.Models
 {
     [Serializable]
-    public class Product : Entity
+    public class Product
     {
-        decimal price;
+        public int Id { get; set; }
+        public string Name { get; set; }
+        private decimal price;
         public decimal Price
         {
             get
@@ -26,6 +28,9 @@ namespace CKK.Logic.Models
                 price = value;
             }
         }
+        public int Quantity { get; set; }
+        public override string ToString() => $"{Id} \t\t {Name} \t\t {Price:C} \t\t {Quantity}";
+
 
     }
 }
