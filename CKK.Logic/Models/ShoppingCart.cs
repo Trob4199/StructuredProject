@@ -15,5 +15,7 @@ namespace CKK.Logic.Models
         public int ProductId { get; set; }
         public int Quantity { get; set; }
 
+        public List<ShoppingCartItem> ShoppingCartItems { get; set; }
+
     }
 }

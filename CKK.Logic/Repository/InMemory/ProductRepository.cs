@@ -7,6 +7,9 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+
+
 namespace CKK.Logic.Repository.InMemory
 {
     public class ProductRepository : IProductRepository
@@ -48,7 +51,7 @@ namespace CKK.Logic.Repository.InMemory
             using (var conn = _connectionFactory.GetConnection)
             {
 
-                var result = conn.Query<Product>($"SELECT * FROM {_tableName} WHERE Name like '%' + @Name + '%'", new { Name = name });
+                var result = conn.Query<Product>($"SELECT * FROM {_tableName} WHERE Name like '%' + @Name + '%'", new { Name = name }).ToList();
                 if (result == null)
                     throw new KeyNotFoundException($"{_tableName} with name [{name}] could not be found.");
                 return result;
@@ -75,6 +78,8 @@ namespace CKK.Logic.Repository.InMemory
                 conn.Execute($"DELETE FROM {_tableName} WHERE Id=@Id", new { entity.Id });
             }
         }
+
+
         public void Update(Product entity)
         {
             var query = "UPDATE Products SET Name = @Name, Price = @Price, Quantity = @Quantity WHERE Id = @Id";

@@ -9,12 +9,12 @@ namespace CKK.Logic.Models
 {
     public class OrderSummary
     {
-        public OrderSummary(IShoppingCart cart)
+        public OrderSummary(ShoppingCart cart)
         {
             Cart = cart;
         }
 
-        public IShoppingCart Cart { get; set; }
+        public ShoppingCart Cart { get; set; }
 
         
     }

@@ -3,6 +3,7 @@ using CKK.Logic.Interfaces;
 using CKK.Logic.Exceptions;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace CKK.Logic.Models
 {
@@ -15,6 +16,8 @@ namespace CKK.Logic.Models
         private int quantity { get; set; }
         public int ShoppingCartItemId { get; set; }
         public List<ShoppingCart> Carts { get; set; } = new List<ShoppingCart>();
+
+        public int CustomerId { get; set; }
 
         public int Quantity
         {

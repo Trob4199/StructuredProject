@@ -11,7 +11,7 @@ namespace CKK.Logic.Repository.InMemory
 {
     public class DatabaseConnectionFactory : IConnectionFactory
     {
-        private readonly string connectionString = "Server=localhost\\SQLEXPRESS;Database=StructuredProjectDB;Trusted_Connection=True;";
+        private readonly string connectionString = "Server=localhost\\SQLEXPRESS;Database=StructuredProjectDB3;Trusted_Connection=True;MultipleActiveResultSets=true";
         public IDbConnection GetConnection
         {
             get

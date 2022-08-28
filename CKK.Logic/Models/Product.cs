@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +15,9 @@ namespace CKK.Logic.Models
         public int Id { get; set; }
         public string Name { get; set; }
         private decimal price;
+
+        [DataType(DataType.Currency)]
+        [Column(TypeName = "decimal(18, 2)")]
         public decimal Price
         {
             get
@@ -29,6 +34,7 @@ namespace CKK.Logic.Models
             }
         }
         public int Quantity { get; set; }
+        public int CartCount { get; set; }
         public override string ToString() => $"{Id} \t\t {Name} \t\t {Price:C} \t\t {Quantity}";
 
 
