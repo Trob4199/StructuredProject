@@ -1,20 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using CKK.Logic.Interfaces;
 using CKK.Logic.Models;
 using System.Collections.ObjectModel;
-using CKK.Logic.Interfaces;
-using CKK.Logic.Repository.InMemory;
+using System.Windows;
 
 
 namespace CKK.UI
@@ -33,10 +20,10 @@ namespace CKK.UI
             _Store = store;
             InitializeComponent();
             _Items = new ObservableCollection<Product>();
-            lbInventoryList.ItemsSource = _Items;
+            lvProduct.ItemsSource = _Items;
             RefreshList();
 
-            
+
 
         }
 

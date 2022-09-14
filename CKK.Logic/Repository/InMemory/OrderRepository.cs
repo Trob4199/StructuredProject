@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CKK.Logic.Models;
 using CKK.Logic.Repository.Interfaces;
-using CKK.Logic.Models;
 using Dapper;
 
 namespace CKK.Logic.Repository.InMemory

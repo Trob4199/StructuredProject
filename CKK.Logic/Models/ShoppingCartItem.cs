@@ -1,9 +1,5 @@
-﻿using System;
-using CKK.Logic.Interfaces;
-using CKK.Logic.Exceptions;
+﻿using CKK.Logic.Exceptions;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace CKK.Logic.Models
 {

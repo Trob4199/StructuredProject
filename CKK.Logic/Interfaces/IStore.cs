@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CKK.Logic.Models;
+﻿using CKK.Logic.Models;
 namespace CKK.Logic.Interfaces
 {
     public interface IStore
     {
         Product AddProduct(Product item);
         Product UpdateProduct(Product item);
+        Product FindByName(string name);
         List<Product> GetAllProducts();
         Product FindProductById(int id);
         public Product DeleteProduct(int id);

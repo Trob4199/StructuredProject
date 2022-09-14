@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CKK.Logic.Interfaces;
+﻿using CKK.Logic.Exceptions;
 using CKK.Logic.Models;
 using CKK.Persistance.Interfaces;
-using CKK.Logic.Exceptions;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.Serialization;
-using System.IO;
 
 
 namespace CKK.Persistance.Models
@@ -22,17 +14,11 @@ namespace CKK.Persistance.Models
         int IdCounter;
         public BinaryFormatter formatter = new BinaryFormatter();
         public FileStream output;
-
-
-
         public FileStore()
         {
             Load();
-            
+
         }
-
-
-
 
         public StoreItem AddStoreItem(Product prod, int quantity)
         {
@@ -69,7 +55,7 @@ namespace CKK.Persistance.Models
                 Items.Add(storeItemtemp);
                 Save();
                 return storeItemtemp;
-                
+
             }
             else
             {
@@ -82,17 +68,9 @@ namespace CKK.Persistance.Models
 
                     }
                 }
-
-
-
-
                 Save();
                 return Items[idIndex];
-
             }
-
-            
-
         }
 
         public StoreItem RemoveStoreItem(int id, int quantity)
@@ -127,14 +105,10 @@ namespace CKK.Persistance.Models
                 throw new ProductDoesNotExistException("Product being removed does not exist.");
             }
             return null;
-
-
         }
 
         public String DeleteStoreItem(int id)
         {
-
-
             if (FindStoreItemById(id) != null)
             {
                 for (int i = 0; i < Items.Count; i++)
@@ -152,7 +126,6 @@ namespace CKK.Persistance.Models
                 throw new ProductDoesNotExistException("Product being removed does not exist.");
             }
             return null;
-
         }
         public StoreItem FindStoreItemById(int Id)
         {
@@ -209,7 +182,7 @@ namespace CKK.Persistance.Models
         {
             BinaryFormatter formatter2 = new BinaryFormatter();
             Stream input = new FileStream(FilePath, FileMode.Open, FileAccess.Read);
-            
+
             Items = (List<StoreItem>)(formatter2.Deserialize(input));
 
             input.Close();
@@ -218,16 +191,15 @@ namespace CKK.Persistance.Models
 
         public void CreatePath()
         {
-
             try
             {
                 //open file with write access
                 output = new FileStream(FilePath, FileMode.OpenOrCreate, FileAccess.Write);
 
             }
-            catch(IOException)
+            catch (IOException)
             {
-                
+
             }
         }
     }

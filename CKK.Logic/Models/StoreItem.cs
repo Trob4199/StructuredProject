@@ -1,5 +1,4 @@
-﻿using System;
-using CKK.Logic.Interfaces;
+﻿using CKK.Logic.Interfaces;
 
 
 namespace CKK.Logic.Models
@@ -7,7 +6,7 @@ namespace CKK.Logic.Models
     [Serializable]
     public class StoreItem : InventoryItem
     {
-    
+
         public StoreItem(Product aProduct, int aQuantity)
         {
             Product = aProduct;
@@ -52,7 +51,7 @@ namespace CKK.Logic.Models
 
         public override string ToString()
         {
-            string str = ($"{Product.Id} \t\t {Product.Name} \t\t {Product.Price:C} \t\t {Quantity}") ;
+            string str = ($"{Product.Id} \t\t {Product.Name} \t\t {Product.Price:C} \t\t {Quantity}");
             return str;
         }
 

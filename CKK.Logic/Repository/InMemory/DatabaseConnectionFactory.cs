@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CKK.Logic.Repository.Interfaces;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CKK.Logic.Repository.Interfaces;
 using System.Data.Common;
 
 namespace CKK.Logic.Repository.InMemory

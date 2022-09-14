@@ -1,9 +1,4 @@
-﻿
-using System;
-using CKK.Logic.Exceptions;
-
-
-namespace StructuredProject
+﻿namespace StructuredProject
 {
     class Program
     {

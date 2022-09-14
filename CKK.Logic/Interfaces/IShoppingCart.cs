@@ -1,5 +1,4 @@
 ﻿using CKK.Logic.Models;
-using System.Collections.Generic;
 
 namespace CKK.Logic.Interfaces
 {

@@ -1,23 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using CKK.Logic.Models;
-using CKK.UI;
-using CKK.Persistance.Models;
-using CKK.Logic.Interfaces;
+﻿using CKK.Logic.Interfaces;
 using CKK.Logic.Repository.InMemory;
-
+using CKK.Logic.Repository.Interfaces;
+using CKK.UI;
+using System.Windows;
 
 namespace StructuredProject
 {
@@ -28,12 +13,13 @@ namespace StructuredProject
     {
 
         private IStore Store;
-        
+
+
         public MainWindow()
         {
             DatabaseConnectionFactory conn = new DatabaseConnectionFactory();
-            ProductRepository prodrepo = new ProductRepository(conn);
-            Store = new DataStore(prodrepo);
+            IProductRepository Prodrepo = new ProductRepository(conn);
+            Store = new DataStore(Prodrepo);
 
             InitializeComponent();
         }
@@ -47,10 +33,10 @@ namespace StructuredProject
 
         private void InventoryItembutton_Click(object sender, RoutedEventArgs e)
         {
-            
+
             InventoryManagementForm inven = new InventoryManagementForm(Store);
             inven.Show();
- 
+
         }
 
         private void RemoveItembutton_Click(object sender, RoutedEventArgs e)
@@ -63,6 +49,13 @@ namespace StructuredProject
         {
             ProductSearchForm search = new ProductSearchForm(Store);
             search.Show();
+        }
+
+        private void EditItembutton_Click(object sender, RoutedEventArgs e)
+        {
+            ProductEditForm edit = new ProductEditForm(Store);
+            edit.Show();
+
         }
     }
 }

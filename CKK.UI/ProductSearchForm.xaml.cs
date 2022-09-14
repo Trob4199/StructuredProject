@@ -1,21 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using CKK.Logic.Interfaces;
 using CKK.Logic.Models;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using CKK.Persistance.Models;
-using CKK.Logic.Interfaces;
-using CKK.Logic.Repository.InMemory;
+using System.Windows;
 
 namespace CKK.UI
 {
@@ -30,7 +17,7 @@ namespace CKK.UI
 
         public ProductSearchForm(IStore store)
         {
-            
+
             _Store = store;
             InitializeComponent();
 
@@ -71,13 +58,13 @@ namespace CKK.UI
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
             string searchtext = Searchbox.Text;
             List<Product> itemstemp = new List<Product>();
             itemstemp = _Store.GetProductsByName(searchtext);
             _Items = new ObservableCollection<Product>(itemstemp);
             lbInventoryList.ItemsSource = _Items;
-            
+
         }
     }
 }

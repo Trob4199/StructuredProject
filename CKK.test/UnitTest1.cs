@@ -1,5 +1,5 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CKK.Logic.Models;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CKK.test
 {
@@ -22,7 +22,7 @@ namespace CKK.test
             Product2.Name = "Hammer";
             Product2.Price = 12.50m;
 
-            Customer1.Id = 1 ;
+            Customer1.Id = 1;
             Customer1.Name = "Trevor";
 
             Customer1.Address = "Street";
@@ -31,7 +31,7 @@ namespace CKK.test
             //ShoppingCartItem addtest = ShoppingCart1.AddProduct(Product1, 10);
 
             //Assert.IsNotNull(ShoppingCart1.AddProduct(Product1, 10));
-            
+
 
         }
         [TestMethod]
@@ -42,7 +42,7 @@ namespace CKK.test
             Product Product2 = new();
 
 
-            Product1.Id= 1;
+            Product1.Id = 1;
             Product1.Name = "Screw";
             Product1.Price = .090m;
 

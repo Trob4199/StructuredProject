@@ -1,12 +1,7 @@
 ﻿using CKK.Logic.Models;
 using CKK.Logic.Repository.Interfaces;
 using Dapper;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 
@@ -35,6 +30,18 @@ namespace CKK.Logic.Repository.InMemory
                 var result = conn.QuerySingleOrDefault<Product>($"SELECT * FROM {_tableName} WHERE Id = @Id", new { Id = id });
                 if (result == null)
                     throw new KeyNotFoundException($"{_tableName} with id [{id}] could not be found.");
+                return result;
+            }
+        }
+
+        public Product FindByName(string name)
+        {
+            using (var conn = _connectionFactory.GetConnection)
+            {
+
+                var result = conn.QuerySingleOrDefault<Product>($"SELECT * FROM {_tableName} WHERE Name = @Name", new { Name = name });
+                if (result == null)
+                    throw new KeyNotFoundException($"{_tableName} with name [{name}] could not be found.");
                 return result;
             }
         }
@@ -78,8 +85,6 @@ namespace CKK.Logic.Repository.InMemory
                 conn.Execute($"DELETE FROM {_tableName} WHERE Id=@Id", new { entity.Id });
             }
         }
-
-
         public void Update(Product entity)
         {
             var query = "UPDATE Products SET Name = @Name, Price = @Price, Quantity = @Quantity WHERE Id = @Id";

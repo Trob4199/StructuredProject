@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CKK.Logic.Models;
 using CKK.Logic.Repository.Interfaces;
-using CKK.Logic.Models;
 using Dapper;
-using System.ComponentModel.DataAnnotations;
 
 namespace CKK.Logic.Repository.InMemory
 {
@@ -45,9 +39,12 @@ namespace CKK.Logic.Repository.InMemory
                 conn.Execute(insertQuery, _shoppingCartItem);
             }
         }
-        public ShoppingCartItem RemoveFromCart(int shoppingCartId, int itemId, int quantity = 1)
+        public void RemoveFromCart(int shoppingCartId, int itemId, int quantity = 1)
         {
-            throw new NotImplementedException();
+            using (var conn = _connectionFactory.GetConnection)
+            {
+                conn.Execute($"DELETE FROM {_tableName} WHERE ProductId=@ProductId AND ShoppingCartId = @ShoppingCartId", new { ProductId = itemId, ShoppingCartId = shoppingCartId });
+            }
         }
         public decimal GetTotal(int ShoppingCartId)
         {
@@ -62,26 +59,23 @@ namespace CKK.Logic.Repository.InMemory
                 return result;
             }
         }
-
         public void Ordered(int shoppingCartId)
         {
             int ordered = 1;
             using (var conn = _connectionFactory.GetConnection)
             {
-                conn.Execute($"UPDATE {_tableName} SET Ordered = 1 WHERE ShoppingCartId = @shoppingCartId", new {ShoppingCartId = shoppingCartId });
+                conn.Execute($"UPDATE {_tableName} SET Ordered = 1 WHERE ShoppingCartId = @shoppingCartId", new { ShoppingCartId = shoppingCartId });
             }
         }
         public IEnumerable<ShoppingCartItem> GetProductsByCust(int customerId)
         {
             using (var conn = _connectionFactory.GetConnection)
             {
-                var result = conn.Query<ShoppingCartItem>($"SELECT * FROM {_tableName} WHERE CustomerId = @customerId", new{CustomerId = customerId});
-                
+                var result = conn.Query<ShoppingCartItem>($"SELECT * FROM {_tableName} WHERE CustomerId = @customerId", new { CustomerId = customerId });
+
                 return result;
             }
 
-
-            
         }
     }
 }

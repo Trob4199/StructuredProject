@@ -1,10 +1,8 @@
-﻿using System;
-using System.Text;
-using System.Text.Json;
+﻿using CKK.Logic.Models;
 using System.Net;
 using System.Net.Sockets;
-using System.Globalization;
-using CKK.Logic.Models;
+using System.Text;
+using System.Text.Json;
 
 
 
@@ -21,7 +19,7 @@ namespace CKK.Server
         private int localport = 11000;
         private int remoteport = 11001;
         public List<Order> orders = new List<Order>();
-        public Queue<Order> OrdersQueue = new Queue<Order>();   
+        public Queue<Order> OrdersQueue = new Queue<Order>();
 
         public static void Main()
         {
@@ -64,7 +62,7 @@ namespace CKK.Server
         {
             try
             {
-                
+
                 // create local IPEndpoint with the local IPAddress and bind it to the EndPoint
                 epLocal = new IPEndPoint(IPAddress.Parse(localip), localport);
                 sck.Bind(epLocal);
@@ -108,7 +106,7 @@ namespace CKK.Server
                         var json = (JsonElement)JsonSerializer.Deserialize<object>(ref utf8reader);
                         var ordertemp = json.ToObject<Order>();
                         OrdersQueue.Enqueue(ordertemp);
-                        
+
                     }
                     catch (Exception exp)
                     {

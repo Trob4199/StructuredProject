@@ -1,21 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using CKK.Logic.Interfaces;
 using CKK.Logic.Models;
-using CKK.Logic.Interfaces;
-using CKK.UI;
-using CKK.Persistance.Models;
-using CKK.Logic.Repository.InMemory;
+using System;
+using System.Windows;
 
 namespace CKK.UI
 {
@@ -25,9 +11,12 @@ namespace CKK.UI
     public partial class AddItemWindow : Window
     {
         private IStore Store;
+
+
         public AddItemWindow(IStore store)
         {
             Store = store;
+
             InitializeComponent();
         }
 
@@ -43,9 +32,9 @@ namespace CKK.UI
             productadd.Price = Price;
             productadd.Quantity = quanity;
 
-            
-            
-            Store.AddProduct(productadd);
+            productadd = Store.AddProduct(productadd);
+
+            productadd = Store.FindByName(productadd.Name);
 
             MessageBox.Show($"New Item Number {productadd.Id} was created for {Description}.");
             clearboxes();
@@ -57,14 +46,14 @@ namespace CKK.UI
         {
             ItemDescTextBox.Clear();
             QtyTextBox.Clear();
-            PriceTextBox.Clear();   
+            PriceTextBox.Clear();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
             this.Close();
-            
+
         }
     }
 }

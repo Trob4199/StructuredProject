@@ -1,9 +1,6 @@
 ﻿using CKK.Logic.Interfaces;
 using CKK.Logic.Models;
 using CKK.Logic.Repository.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 namespace CKK.Logic.Repository.InMemory
 {
     public class DataStore : IStore
@@ -18,6 +15,12 @@ namespace CKK.Logic.Repository.InMemory
             _ProductRepository.Add(item);
             return item;
         }
+        public Product FindByName(string name)
+        {
+            var item = _ProductRepository.FindByName(name);
+            return item;
+        }
+
         public Product DeleteProduct(int id)
         {
             var item = _ProductRepository.Find(id);

@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CKK.Logic.Exceptions;
 using CKK.Logic.Models;
-using CKK.Logic.Exceptions;
 
 namespace CKK.Logic.Interfaces
 {
     [Serializable]
     public abstract class InventoryItem : Object
     {
-        private int quanity; 
+        private int quanity;
         public Product Product { get; set; }
-        public int Quantity 
+        public int Quantity
         {
             get
             {
@@ -21,7 +16,7 @@ namespace CKK.Logic.Interfaces
             }
             set
             {
-                if(value < 0)
+                if (value < 0)
                 {
                     throw new InventoryItemStockTooLowException("Quanitiy must be greater than 0");
                 }

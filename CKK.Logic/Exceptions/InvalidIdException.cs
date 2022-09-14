@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CKK.Logic.Models;
-using CKK.Logic.Interfaces;
-
-namespace CKK.Logic.Exceptions
+﻿namespace CKK.Logic.Exceptions
 {
     [Serializable]
     public class InvalidIdException : Exception
@@ -15,7 +7,7 @@ namespace CKK.Logic.Exceptions
         {
 
         }
-        public InvalidIdException(string messageValue ) : base(messageValue)
+        public InvalidIdException(string messageValue) : base(messageValue)
         {
 
         }

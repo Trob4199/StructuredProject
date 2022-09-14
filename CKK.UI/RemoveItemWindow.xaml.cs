@@ -1,20 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CKK.Logic.Interfaces;
+using CKK.Logic.Models;
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using CKK.Logic.Models;
-using CKK.Persistance.Models;
-using CKK.Logic.Repository.InMemory;
-using CKK.Logic.Interfaces;
 
 namespace CKK.UI
 {
@@ -26,7 +14,7 @@ namespace CKK.UI
         int ID;
         Product ProdTemp;
         private IStore Store;
-        bool ready = false; 
+        bool ready = false;
 
         public RemoveItemWindow(IStore store)
         {
@@ -43,7 +31,7 @@ namespace CKK.UI
                 ID = Convert.ToInt32(((TextBox)sender).Text);
 
 
-                
+
                 ProdTemp = Store.FindProductById(ID);
 
                 if (ProdTemp != null)

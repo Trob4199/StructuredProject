@@ -5,7 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CKK.UI"
         mc:Ignorable="d"
-        Title="InventoryManagementForm" Height="450" Width="640">
+        Title="InventoryManagementForm" Height="450" Width="750">
+    <Window.Resources>
+        <Style TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -21,17 +27,25 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <Label Name="headersLabel" Content="Item                       Name                   Price                       Quantity" Grid.Row="0" 
-               VerticalAlignment="Bottom" Grid.Column="1" FontSize="16"/>
-        <ListBox Name="lbInventoryList" HorizontalAlignment="Center" Height="185" Margin="0,0,0,0" 
-                 VerticalAlignment="Center" Width="600" Grid.Column="1" Grid.Row="1" FontSize="16"/>
+        
+        <ListView Margin="10" Name="lvProduct" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
+            <ListView.View>
+                <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Inventory Information">
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="Item" Width="150" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Name" Width="200" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Price}" Header="Price" Width="150"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Quantity}" Header="Quantity" Width="150"/>
+
+                </GridView>
+            </ListView.View>
+        </ListView>
         <Button Name="DoneButton" Content="Done"  Width="150" Height="40" 
-                Grid.Column="1" Grid.Row="3" FontSize="16" Click="DoneButton_Click" />
+                Grid.Column="1" Grid.Row="3" FontSize="16" Click="DoneButton_Click" Grid.ColumnSpan="2"/>
         <Button Name="qtySortButton" Content="Sort by Quantity"  Width="150" Height="40" 
-                Grid.Column="1" Grid.Row="2" FontSize="16" Click="qtySortButton_Click" HorizontalAlignment="Left"
-                Margin="50,20,0,0"/>
+                Grid.Column="1" Grid.Row="2" FontSize="16" Click="qtySortButton_Click" HorizontalAlignment="Center"
+                Margin="0,0,0,0"/>
         <Button Name="priceSortButton" Content="Sort by Price"  Width="150" Height="40" 
-                Grid.Column="1" Grid.Row="2" FontSize="16" Click="priceSortButton_Click"  HorizontalAlignment="Right"
-                Margin="0,20,50,0"/>
+                Grid.Column="2" Grid.Row="2" FontSize="16" Click="priceSortButton_Click"  HorizontalAlignment="Center"
+                Margin="0,0,0,0"/>
     </Grid>
 </Window>

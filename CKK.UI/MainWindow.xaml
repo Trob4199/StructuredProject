@@ -23,13 +23,17 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
+        <Label Name="CkkLabel" Grid.Row="1" Grid.Column="1" Content="Corey's Knick Knacks Inventory Managment" Grid.ColumnSpan="2" FontSize="25"
+               HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Button Name="AddItembutton" Margin="0,10,0,30" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="2" Content="Add Item" Click="AddItembutton_Click"
-                FontSize="16" Height="47" Width="100"/>
+                FontSize="16" Height="47" Width="160"/>
         <Button Name="RemoveItembutton" Margin="0,10,0,30" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="2" Content="Remove Item"
-                FontSize="16" Height="47" Width="140" Click="RemoveItembutton_Click"/>
+                FontSize="16" Height="47" Width="160" Click="RemoveItembutton_Click"/>
         <Button Name="InventoryItembutton" Margin="0,10,0,30" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="3" Content="View All Inventory" Click="InventoryItembutton_Click"
                 FontSize="16" Height="47" Width="160"/>
         <Button Name="SearchByItembutton" Margin="0,10,0,30" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="3" Content="Product Search"
-                FontSize="16" Height="47" Width="140" Click="SearchByItembutton_Click"/>
+                FontSize="16" Height="47" Width="160" Click="SearchByItembutton_Click"/>
+        <Button Name="EditItembutton" Margin="0,10,0,30" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="4" Content="Edit Product"
+                FontSize="16" Height="47" Width="160" Click="EditItembutton_Click"/>
     </Grid>
 </Window>

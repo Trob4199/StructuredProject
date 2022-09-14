@@ -1,15 +1,7 @@
-﻿using CKK.Logic.Interfaces;
-using CKK.Logic.Models;
+﻿using CKK.Logic.Models;
 //using CKK.Logic.Repository.Implementation;
 using CKK.Logic.Repository.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using CKK.Client;
 
 
 namespace CKK.Online.Controllers
@@ -19,7 +11,7 @@ namespace CKK.Online.Controllers
         private readonly IProductRepository _products;
         private readonly IShoppingCartItemRepository _items;
         private readonly IOrderRepository _order;
-        
+
 
 
         public ProductController(IProductRepository products, IShoppingCartItemRepository items, IOrderRepository order)
@@ -69,10 +61,24 @@ namespace CKK.Online.Controllers
                 _items.AddToCart(shoppingCartItem);
                 return RedirectToAction(nameof(Cart));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return View();
             }
+        }
+
+        public ActionResult Remove(int? Id)
+        {
+            if (Id == null)
+            {
+                return NotFound();
+            }
+
+            var id = (Id ?? 0);
+            _items.RemoveFromCart(2, id);
+
+            return RedirectToAction(nameof(Cart));
+
         }
 
         public ActionResult Cart()
@@ -89,8 +95,6 @@ namespace CKK.Online.Controllers
 
         public ActionResult Order(int? cartId)
         {
-            //throw new NotImplementedException();
-
             var cartListtemp = _items.GetProducts(2).ToList();
 
             Order ordertemp = new Order
@@ -99,36 +103,46 @@ namespace CKK.Online.Controllers
                 ShoppingCartId = 2
             };
 
-            _order.Add(ordertemp);
-            _items.Ordered(ordertemp.ShoppingCartId);
+
+
 
             CKK.Client.ClientConnection c = new CKK.Client.ClientConnection(ordertemp);
 
-            c.OrderProcess();
-            
+
+            string message = c.OrderProcess();
+
+            message = message.TrimEnd('\0');
 
 
-            foreach (var prod in cartListtemp)
+
+            if (message != "Error, Could not process order")
             {
-                var prodId = prod.ProductId;
-                var cartQty = prod.Quantity;
-                var prodtemp = _products.Find(prodId);
-                prodtemp.Quantity = prodtemp.Quantity - cartQty;
-                _products.Update(prodtemp);
+
+                foreach (var prod in cartListtemp)
+                {
+                    _order.Add(ordertemp);
+                    _items.Ordered(ordertemp.ShoppingCartId);
+                    var prodId = prod.ProductId;
+                    var cartQty = prod.Quantity;
+                    var prodtemp = _products.Find(prodId);
+                    prodtemp.Quantity = prodtemp.Quantity - cartQty;
+                    _products.Update(prodtemp);
+                }
+            }
+            else
+            {
+                message = "Error, Could not process order. Please return to cart";
             }
 
 
-            
 
 
-            return RedirectToAction(nameof(Index));
-            /*try
-            {
-                OrderSummary ordersummary = new OrderSummary(_items);
-                _order.
-            }
-            return View();
-            */
+            return RedirectToAction("OrderComplete", new { message = message });
+
+        }
+        public ActionResult OrderComplete(string message)
+        {
+            return View((object)message);
         }
     }
 }

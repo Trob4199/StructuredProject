@@ -1,11 +1,9 @@
-﻿using System;
-using System.Text;
-using System.Text.Json;
+﻿using CKK.Logic.Interfaces;
+using CKK.Logic.Models;
 using System.Net;
 using System.Net.Sockets;
-using System.Globalization;
-using CKK.Logic.Models;
-using CKK.Logic.Interfaces;
+using System.Text;
+using System.Text.Json;
 
 
 
@@ -23,26 +21,22 @@ namespace CKK.Client
         private IStore Store;
         private Customer Customer1;
         private Order Order1;
+        private string receivedMessage;
+
 
         public ClientConnection(Order order)
         {
             Order1 = order;
-
         }
 
-
-        public void OrderProcess()
+        public string OrderProcess()
         {
             Form1_Load();
             StartSever();
             SendMessage(Order1);
             startReceiving();
+            return receivedMessage;
         }
-
-
-
-
-
 
         public void Form1_Load()
         {
@@ -52,7 +46,6 @@ namespace CKK.Client
 
             // Get own IP
             localip = GetLocalIP();
-
         }
 
         private static string GetLocalIP()
@@ -84,10 +77,6 @@ namespace CKK.Client
                 //create a buffer that will be use ot receive messages from the socket and start to listen ot the specific port
                 buffer = new byte[1500];
                 sck.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epRemote, new AsyncCallback(MessageCallBack), buffer);
-
-                //change GUI to enable messages to send. 
-                Console.WriteLine("Connected");
-
             }
             catch (Exception ex)
             {
@@ -111,31 +100,41 @@ namespace CKK.Client
 
                     //converts message data byte array to string
                     ASCIIEncoding eEncoding = new ASCIIEncoding();
-                    string receivedMessage = eEncoding.GetString(receivedData);
-
-                    //adding message to the listbox
-                    Console.WriteLine(receivedMessage);
-
-
-                    Console.Write("\n\nPress Enter to continue....");
-                    Console.ReadLine();
-
-
+                    receivedMessage = eEncoding.GetString(receivedData);
                 }
 
                 sck.Shutdown(SocketShutdown.Both);
                 sck.Close();
+
             }
+
             catch (Exception exp)
             {
-                Console.WriteLine(exp.ToString());
+                receivedMessage = "Error, Could not process order";
             }
         }
 
         private void startReceiving()
         {
             buffer = new byte[1500];
-            sck.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epRemote, new AsyncCallback(MessageCallBack), buffer);
+            var done = false;
+            int i = 0;
+            var message = sck.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epRemote, new AsyncCallback(MessageCallBack), buffer);
+            while (done == false)
+            {                   
+                if (receivedMessage != null && message.IsCompleted == true)
+                {
+                    done = true;
+                }
+                else if(receivedMessage == "Error, Could not process order")
+                {
+                    done = true;
+                    sck.Close();
+                }
+
+                
+            }
+            
         }
 
         private void SendMessage(Order newcart)

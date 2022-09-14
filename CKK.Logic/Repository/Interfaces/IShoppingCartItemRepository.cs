@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CKK.Logic.Models;
+﻿using CKK.Logic.Models;
 
 namespace CKK.Logic.Repository.Interfaces
 {
@@ -13,7 +8,7 @@ namespace CKK.Logic.Repository.Interfaces
         public ShoppingCartItem AddToCart(int itemId, int quantity);
         public ShoppingCartItem AddToCart(string itemName, int quantity);
         public void AddToCart(ShoppingCartItem _shoppingCartItem);
-        public ShoppingCartItem RemoveFromCart(int shoppingCartId, int itemId, int quantity = 1);
+        public void RemoveFromCart(int shoppingCartId, int itemId, int quantity = 1);
         public decimal GetTotal(int ShoppingCartId);
         public List<ShoppingCartItem> GetProducts(int shoppingCartId);
         public IEnumerable<ShoppingCartItem> GetProductsByCust(int customerId);

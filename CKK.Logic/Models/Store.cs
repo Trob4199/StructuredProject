@@ -1,17 +1,13 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using CKK.Logic.Interfaces;
-using CKK.Logic.Exceptions;
+﻿using CKK.Logic.Exceptions;
 
 
 namespace CKK.Logic.Models
 {
-    public class Store 
+    public class Store
     {
 
-         List<StoreItem> Items = new();
-        
+        List<StoreItem> Items = new();
+
 
         public StoreItem AddStoreItem(Product prod, int quantity)
         {
@@ -22,7 +18,7 @@ namespace CKK.Logic.Models
             {
                 throw new InventoryItemStockTooLowException("Store Item quantity must be greater than 0");
             }
-            if(productid == 0)
+            if (productid == 0)
             {
                 if (Items.Count > 0)
                 {
@@ -35,7 +31,7 @@ namespace CKK.Logic.Models
                     prod.Id = 1;
                 }
             }
-            if(quantity <= 0)
+            if (quantity <= 0)
             {
                 return null;
             }
@@ -54,16 +50,14 @@ namespace CKK.Logic.Models
                 {
                     if (Items[i].GetProduct().Id == prod.Id)
                     {
-                        Items[i].Quantity=(Items[i].Quantity + quantity);
+                        Items[i].Quantity = (Items[i].Quantity + quantity);
                         idIndex = i;
 
                     }
                 }
-
                 return Items[idIndex];
-
             }
-           
+
         }
 
         public StoreItem RemoveStoreItem(int id, int quantity)
@@ -75,19 +69,19 @@ namespace CKK.Logic.Models
                 throw new ArgumentOutOfRangeException("Quantity to remove must be greater than 0");
             }
 
-            if(FindStoreItemById(id) != null)
+            if (FindStoreItemById(id) != null)
             {
-                for (int i =0; i < Items.Count; i++)
+                for (int i = 0; i < Items.Count; i++)
                 {
                     if (Items[i].GetProduct().Id == id)
                     {
                         idIndex = i;
                         if (Items[i].Quantity > quantity)
                         {
-                            Items[i].Quantity=(Items[i].Quantity - quantity);
+                            Items[i].Quantity = (Items[i].Quantity - quantity);
                         }
                         else Items[i].Quantity = 0;
-                        
+
 
                     }
                 }
@@ -98,21 +92,19 @@ namespace CKK.Logic.Models
                 throw new ProductDoesNotExistException("Product being removed does not exist.");
             }
             return null;
-            
+
 
         }
 
         public String DeleteStoreItem(int id)
         {
-            
-
             if (FindStoreItemById(id) != null)
             {
                 for (int i = 0; i < Items.Count; i++)
                 {
                     if (Items[i].GetProduct().Id == id)
                     {
-                        Items.RemoveAt(i); 
+                        Items.RemoveAt(i);
                     }
                 }
                 return "Deleted";
@@ -140,16 +132,9 @@ namespace CKK.Logic.Models
                     select item;
 
                 return storeItem2.FirstOrDefault();
-
-                //var storeItem1 =
-                //Items.Where(f => f.GetProduct().GetId() == Id).FirstOrDefault();
-
-
-                //return storeItem1;
             }
 
             return null;
-
         }
 
         public List<StoreItem> GetStoreItems()
@@ -161,7 +146,7 @@ namespace CKK.Logic.Models
         {
             List<StoreItem> StoreItems = new List<StoreItem>();
 
-            for (int i = 0; i< Items.Count; i++)
+            for (int i = 0; i < Items.Count; i++)
             {
                 var item = Items[i];
                 if (item.Product.Name.Contains(name))
